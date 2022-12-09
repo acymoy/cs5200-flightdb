@@ -26,7 +26,7 @@ def main_menu(connection, cursor):
         print('Please select an operation.')
         print('1) View all flights.\n2) View an airline\'s flights.\n3) View flights arriving at a specific airport.\n4) Search for flight by airline and number.')
         print('5) Add an aircraft model.\n6) Add a commercial airplane.\n7) Add a flight.\n8) Add a passenger.\n9) Add an existing passenger to a flight.\n10) Change flight departure time.')
-        print('11) Change flight arrival time.\n12) Cancel (remove) a flight.\n13) Remove an employee.\nQ) Quit.')
+        print('11) Change flight arrival time.\n12) Cancel (remove) a flight.\n13) Remove an employee. \n14) View all passengers on a flight.\n15) View all flights a specific passenger has been on.\nQ) Quit.')
         selection = input('Please enter a number (or Q to quit): ')
         if selection.lower() == 'q':
             return
@@ -58,6 +58,10 @@ def main_menu(connection, cursor):
                 cancelFlight(cursor)
             case 13:
                 removeEmployee(cursor)
+            case 14: 
+                passengersOnFlight(cursor)
+            case 15:
+                getPassengerFlights(cursor)
             case _:
                 print('Invalid selection. Please try again.\n')
         cont = input('Press enter to continue.')
