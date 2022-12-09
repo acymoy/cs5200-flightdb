@@ -83,22 +83,23 @@ def addAirplane(cursor):
     return
 
 def addFlight(cursor):
-    printAirlines(cursor)
-    airline = input('Enter airline (abbr.): ')
-    printAirports(cursor)
-    departure = input('Enter departure airport (abbr.): ')
-    arrival = input('Enter destination airport (abbr.): ')
-    departure_time = input('Enter departure time (format yyyy-mm-dd hh:mm:ss): ')
-    arrival_time = input('Enter arrival time (format yyyy-mm-dd hh:mm:ss): ')
-    airplane = int(input('Enter airplane registration #: '))
-    pilot1 = int(input('Enter pilot 1 employee ID: '))
-    pilot2 = int(input('Enter pilot 2 employee ID: '))
+    try: 
+        printAirlines(cursor)
+        airline = input('Enter airline (abbr.): ')
+        printAirports(cursor)
+        departure = input('Enter departure airport (abbr.): ')
+        arrival = input('Enter destination airport (abbr.): ')
+        departure_time = input('Enter departure time (format yyyy-mm-dd hh:mm:ss): ')
+        arrival_time = input('Enter arrival time (format yyyy-mm-dd hh:mm:ss): ')
+        airplane = int(input('Enter airplane registration #: '))
+        pilot1 = int(input('Enter pilot 1 employee ID: '))
+        pilot2 = int(input('Enter pilot 2 employee ID: '))
 
-    cursor.execute(f'CALL addFlight(\'{airline}\', \'{departure}\', \'{arrival}\', \'{departure_time}\', \'{arrival_time}\', {airplane}, {pilot1}, {pilot2})')
-    print('Successfully added new flight.')
+        cursor.execute(f'CALL addFlight(\'{airline}\', \'{departure}\', \'{arrival}\', \'{departure_time}\', \'{arrival_time}\', {airplane}, {pilot1}, {pilot2})')
+        print('Successfully added new flight.')
 
-    #except:
-    #    print('Unexpected error. Returning to main menu...')
+    except:
+        print('Unexpected error. Returning to main menu...')
     return
 
 def addPassengerToFlight(cursor):
