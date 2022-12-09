@@ -170,3 +170,24 @@ CREATE PROCEDURE removeEmployee(IN in_eid INT)
 	END :)
 DELIMITER ;
 
+#view passengers
+DROP PROCEDURE IF EXISTS getFlightPassengers;
+DELIMITER :)
+CREATE PROCEDURE getFlightPassengers (IN in_airline CHAR(2), IN in_flightnum INT)
+	BEGIN
+		WITH a AS (SELECT * FROM passengers_on_flight WHERE flight_num = in_flightnum AND airline = in_airline) 
+		SELECT name, passenger.passenger_id, a.flight_num FROM passenger, a WHERE a.passenger_id = passenger.passenger_id;
+	END :)
+DELIMITER ;
+
+
+#view flights for a passenger
+DROP PROCEDURE IF EXISTS getPassengerFlights;
+DELIMITER :)
+CREATE PROCEDURE getPassengerFlights (IN in_passenger_id INT)
+	BEGIN
+		WITH a AS (SELECT * FROM passengers_on_flight WHERE passenger_id = in_passenger_id)
+		SELECT a.passenger_id, flight.* FROM flight, a WHERE flight.flight_num = a.flight_num;
+	END :)
+DELIMITER ;
+
