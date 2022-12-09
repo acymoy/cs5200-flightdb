@@ -9,6 +9,8 @@ PREPARE addAirplane FROM 'CALL addAirplane(?, ?, ?, ?)';
 PREPARE addFlight FROM 'CALL addFlight(?, ?, ?, ?, ?, ?, ?, ?)';
 PREPARE addPassenger FROM 'CALL addPassenger(?, ?, ?, ?)';
 PREPARE addPassengerToFlight FROM 'CALL addPassengerToFlight(?, ?, ?)';
+PREPARE getFlighPassengers FROM 'CALL getFlightPassengers(?, ?)';
+PREPARE getPassengerFlights FROM 'CALL getPassengerFlights(?)';
 
 
 EXECUTE getAirlineFlights USING "American Airlines";
