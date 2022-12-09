@@ -270,3 +270,23 @@ def printAirlines(cursor):
 def printAirports(cursor):
     cursor.execute('SELECT airport_id, airport_name, ZIP from airport')
     print(from_db_cursor(cursor))
+    
+    def passengersOnFlight(cursor):
+    flightcode = input('Enter airline and flight number (e.g. DL123): ')
+    
+    try: 
+        airline = flightcode[0:2]
+        flightnum = int(flightcode[2:])
+    except:
+        print('Invalid flight code. Returning to main menu...')
+
+    cursor.execute(f'CALL getFlightPassengers(\'{airline}\', \'{flightnum}\')')
+    print(from_db_cursor(cursor))
+    return
+
+def getPassengerFlights(cursor):
+    passenger = input('Enter passenger ID number (e.g. 12): ')
+
+    cursor.execute(f'CALL getPassengerFlights({passenger})')
+    print(from_db_cursor(cursor))
+    return
