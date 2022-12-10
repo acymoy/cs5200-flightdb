@@ -166,17 +166,16 @@ def changeArrival(cursor):
     return
 
 def changeDeparture(cursor):
-    airline = input('Enter airline (airline designation): ').upper()
-    flight_num = int(input('Enter flight number: '))
-    if not verifyFlight(cursor, airline, flight_num):
-        print('Invalid flight. Returning to main menu...')
-        return
-    departure = input('Enter departure time (format: yyyy-mm-dd hh:mm:ss): ')
-    pattern = re.compile('[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]{1,3})?')
-    while pattern.match(departure):
-        departure = input('Invalid input. Enter departure time (yyyy-mm-dd hh:mm:ss): ')
-
-    cursor.execute(f'CALL changeDeparture(\'{airline}\', {flight_num}, \'{departure}\')')
+    try:
+        airline = input('Enter airline (airline designation): ').upper()
+        flight_num = int(input('Enter flight number: '))
+        if not verifyFlight(cursor, airline, flight_num):
+            print('Invalid flight. Returning to main menu...')
+            return
+        departure = input('Enter departure time (format: yyyy-mm-dd hh:mm:ss): ')
+        cursor.execute(f'CALL changeDeparture(\'{airline}\', {flight_num}, \'{departure}\')')
+    except:
+        print('Invalid input. Returning to main menu...')
     return
 
 def getAirlineFlights(cursor):
