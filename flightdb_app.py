@@ -70,6 +70,7 @@ def main_menu(connection, cursor):
     return
 
 
+
 def main(config):
     '''
     The main function of the program. Handles the meat of the program, including the input loops for user interaction.

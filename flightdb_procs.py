@@ -152,17 +152,17 @@ def cancelFlight(cursor):
     return
 
 def changeArrival(cursor):
-    airline = input('Enter airline (airline designation): ').upper()
-    flight_num = int(input('Enter flight number: '))
-    if not verifyFlight(cursor, airline, flight_num):
-        print('Invalid flight. Returning to main menu...')
-        return
-    arrival = input('Enter arrival time (format: yyyy-mm-dd hh:mm:ss): ')
-    pattern = re.compile('[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]{1,3})?')
-    while pattern.match(arrival):
-        arrival = input('Invalid input. Enter arrival time (yyyy-mm-dd hh:mm:ss): ')
+    try:
+        airline = input('Enter airline (airline designation): ').upper()
+        flight_num = int(input('Enter flight number: '))
+        if not verifyFlight(cursor, airline, flight_num):
+            print('Invalid flight. Returning to main menu...')
+            return
+        arrival = input('Enter arrival time (format: yyyy-mm-dd hh:mm:ss): ')
 
-    cursor.execute(f'CALL changeArrival(\'{airline}\', {flight_num}, \'{arrival}\')')
+        cursor.execute(f'CALL changeArrival(\'{airline}\', {flight_num}, \'{arrival}\')')
+    except:
+        print('Invalid input. Returning to main menu...')
     return
 
 def changeDeparture(cursor):
@@ -271,22 +271,26 @@ def printAirports(cursor):
     cursor.execute('SELECT airport_id, airport_name, ZIP from airport')
     print(from_db_cursor(cursor))
     
-    def passengersOnFlight(cursor):
+def passengersOnFlight(cursor):
     flightcode = input('Enter airline and flight number (e.g. DL123): ')
     
     try: 
         airline = flightcode[0:2]
         flightnum = int(flightcode[2:])
+        cursor.execute(f'CALL getFlightPassengers(\'{airline}\', \'{flightnum}\')')
+        print(from_db_cursor(cursor))
     except:
         print('Invalid flight code. Returning to main menu...')
 
-    cursor.execute(f'CALL getFlightPassengers(\'{airline}\', \'{flightnum}\')')
-    print(from_db_cursor(cursor))
     return
 
 def getPassengerFlights(cursor):
-    passenger = input('Enter passenger ID number (e.g. 12): ')
+    try: 
+        passenger = int(input('Enter passenger ID number (e.g. 12): '))
 
-    cursor.execute(f'CALL getPassengerFlights({passenger})')
-    print(from_db_cursor(cursor))
+        cursor.execute(f'CALL getPassengerFlights({passenger})')
+        print(from_db_cursor(cursor))
+    except:
+        print('Invalid passenger. Returning to main menu...')
+
     return
