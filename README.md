@@ -8,21 +8,21 @@ This project contains a SQL database containing data for a system of airports, a
 The SQL database is based mainly around a flight table, containing information about the airline, airports, pilots, passengers, airplane types/crafts, and employees/attendants. Each table contains the appropriate primary keys and dependencies. 
 
 The database also contains certain procedures that cover CRUD operations:
-Reading:
+#### Reading:
 - Getting all flights
 - Getting flights from a specific airline
 - Searching for a flight by airline and number
 - Getting arrival flights to an airport
 - View passengers and flights for a passenger
-\n Creating:
+#### Creating:
 - Adding an aircraft
 - Adding an airplane
 - Adding a flight
 - Adding a passenger
 - Adding a passenger to a flight
-Updating:
+#### Updating:
 - Change departure/arrival time
-Deleting:
+#### Deleting:
 - Deleting a flight
 - Deleting an employee
 
